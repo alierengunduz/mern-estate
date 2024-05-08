@@ -1,13 +1,10 @@
 import UserModel from "../models/user.model.js";
 import bcryptjs from "bcryptjs";
-
-const signup = async (req, res) => {
+import {errorHandler} from '../utils/error.js';
+const signup = async (req, res,next) => {
   try {
     const { username, email, password } = req.body;
-    if (!username || !email || !password) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
-
+  
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res
@@ -28,8 +25,7 @@ const signup = async (req, res) => {
 
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
-    console.error("An error occurred:", error);
-    res.status(500).json({ message: "Internal server error" });
+    next(error)
   }
 };
 
