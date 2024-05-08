@@ -4,7 +4,8 @@ import {errorHandler} from '../utils/error.js';
 const signup = async (req, res,next) => {
   try {
     const { username, email, password } = req.body;
-  
+ 
+ 
     const existingUser = await UserModel.findOne({ email });
     if (existingUser) {
       return res
