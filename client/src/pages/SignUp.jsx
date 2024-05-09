@@ -52,7 +52,7 @@ const SignUp = () => {
         className="flex flex-col gap-y-5 border-2 p-10 w-full rounded-md shadow-sm shadow-white"
       >
         <Input
-          text="text"
+          type="text"
           placeholder="Enter your name"
           name="username"
           id="username"
@@ -60,7 +60,7 @@ const SignUp = () => {
           value={formData.username}
         />
         <Input
-          text="email"
+          type="email"
           placeholder="Enter your email"
           name="email"
           id="email"
@@ -68,7 +68,7 @@ const SignUp = () => {
           value={formData.email}
         />
         <Input
-          text="password"
+          type="password"
           placeholder="Enter your password"
           name="password"
           id="password"
