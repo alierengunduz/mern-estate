@@ -3,7 +3,7 @@ const Button = ({children,type,disabled}) => {
   return (
     <>
         <button  type={type} disabled={disabled}
-        className='bg-slate-600 text-white py-2 rounded-md hover:bg-slate-700 hover:translate-x-1 transition-all duration-300 '>
+        className='bg-slate-600 text-white py-2 uppercase rounded-md hover:bg-slate-700 hover:translate-x-1 transition-all duration-300 '>
           {children}
         </button>
     </>

@@ -2,6 +2,7 @@ import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
 import { Link,useNavigate } from "react-router-dom";
 import { useState } from "react";
+import OAuth from "../components/OAuth";
 const SignUp = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -77,6 +78,7 @@ const SignUp = () => {
         <Button disabled={loading} type="submit" className="bg-blue-600 text-white py-2">
           {loading ? "Loading..." : "Sign Up"}
         </Button>
+        <OAuth />
       </form>
       <div>
         <p className="text-center mt-5">
