@@ -3,8 +3,9 @@ import { MdOutlineRealEstateAgent } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 const Header = () => {
-  const { user } = useSelector((state) => state.user);
-    const { currentUser } = user;
+  const { currentUser } = useSelector((state) => state.user);
+
+ console.log("header",currentUser);
   return (
     <header className="shadow-lg flex items-center py-3 px-5 justify-between">
       <div>
@@ -40,7 +41,7 @@ const Header = () => {
               <NavLink to="/profile">
                 <img
                   className="w-8 h-8 object-cover rounded-md cursor-pointer"
-                  src={currentUser?.rest.avatar}
+                  src={currentUser.avatar}
                   alt="profile"
                 />
               </NavLink>
