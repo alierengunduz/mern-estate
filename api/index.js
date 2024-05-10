@@ -1,6 +1,7 @@
 import express from 'express';
 import connectDB from './db/config.js';
 import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
@@ -8,6 +9,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 app.use(express.json());
+app.use(cookieParser())
 app.use(morgan('dev'));
 
 

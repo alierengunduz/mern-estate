@@ -1,10 +1,33 @@
+import {errorHandler} from '../utils/error.js';
+import bcryptjs from 'bcryptjs';
+import UserModel from '../models/user.model.js';
 
-
-const test = (req, res) => {
-    res.json({ message: 'User route test' });
+const updateUser = async (req, res,next) => {
+    if (req.user.id !== req.params.id) {
+        return next(errorHandler(401, 'Your can only update your own account'));
+    }
+    try {
+        if (req.body.password) {
+            req.body.password = bcryptjs.hashSync(req.body.password, 10);
+        }
+        // $set : Kullanıcı illa tüm verileri güncellicek diye birşey yok sadece resminide güncelleyebilir yada daha farklı bu şekilde işlermlerde kullanılır. $set 'ten sonra req.body yapma veritabanını hackleyen bir kişi kendini admin yapabilir bu şekilde yap.
+        const updateUser = await UserModel.findByIdAndUpdate(req.params.id, {
+            $set: {
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password,
+                avatar: req.body.avatar
+            }
+        }, {new: true});
+        //şifreyi görmek istemiyoruz veritabanımız hacklenebilir
+        const {password, ...rest} = updateUser._doc;
+        res.status(200).json(rest);
+    } catch (error) {
+        next(error)
+    }
 }
 
 
 export {
-    test
+    updateUser
 }
