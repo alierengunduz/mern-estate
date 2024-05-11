@@ -12,6 +12,9 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
 } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
 import { useRef, useState, useEffect } from "react";
@@ -60,7 +63,7 @@ const Profile = () => {
       }
     );
   };
- 
+  
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -87,7 +90,23 @@ const Profile = () => {
       dispatch(updateUserFailure(error.message));
     }
   };
-  console.log("currentUser",currentUser);
+  const handleDelete = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess());
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  }
+
   return (
     <div className="p-3 max-w-lg  mx-auto">
       <h1 className="text-3xl font-bold tracking-wide text-center">Profile</h1>
@@ -146,7 +165,7 @@ const Profile = () => {
         </Button>
       </form>
       <div className="w-full flex items-center justify-between">
-        <span className="text-red-700 cursor-pointer hover:underline transition duration-300">
+        <span onClick={handleDelete} className="text-red-700 cursor-pointer hover:underline transition duration-300">
           Delete Account
         </span>
         <span className="text-red-700 cursor-pointer hover:underline transition duration-300">
