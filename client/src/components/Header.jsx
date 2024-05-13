@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
 
- console.log("header",currentUser);
   return (
     <header className="shadow-lg flex items-center py-3 px-5 justify-between">
       <div>

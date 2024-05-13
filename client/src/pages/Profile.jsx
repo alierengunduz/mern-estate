@@ -1,5 +1,6 @@
 import Input from "../components/ui/Input";
 import Button from "../components/ui/Button";
+import {Link} from "react-router-dom";
 import { useSelector } from "react-redux";
 import {
   getDownloadURL,
@@ -181,8 +182,11 @@ const Profile = () => {
         <Button disabled={loading} type="submit">
           {loading ? 'Loading...' : 'Update'}
         </Button>
+        <Link to="/create-listing" className="text-center bg-green-700 text-white py-2 rounded-md hover:-translate-x-1 duration-300 transition">
+          Create Listing
+        </Link>
       </form>
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full flex items-center justify-between mt-2">
         <span onClick={handleDelete} className="text-red-700 cursor-pointer hover:underline transition duration-300">
           Delete Account
         </span>
