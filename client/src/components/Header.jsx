@@ -1,57 +1,75 @@
-import { CiSearch } from "react-icons/ci";
-import { MdOutlineRealEstateAgent } from "react-icons/md";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-const Header = () => {
-  const { currentUser } = useSelector((state) => state.user);
+import { FaSearch } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
+export default function Header() {
+  const { currentUser } = useSelector((state) => state.user);
+  const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, [location.search]);
   return (
-    <header className="shadow-lg flex items-center py-3 px-5 justify-between">
-      <div>
-        <h1 className="flex items-center gap-x-1">
-          <span>
-            <MdOutlineRealEstateAgent size={25} />
-          </span>
-          <span className="font-bold tracking-wider">Estate</span>
-        </h1>
-      </div>
-      <div>
-        <form className="relative">
+    <header className='bg-slate-200 shadow-md'>
+      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+        <Link to='/'>
+          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+            <span className='text-slate-500'>Sahand</span>
+            <span className='text-slate-700'>Estate</span>
+          </h1>
+        </Link>
+        <form
+          onSubmit={handleSubmit}
+          className='bg-slate-100 p-3 rounded-lg flex items-center'
+        >
           <input
-            className="border py-1 px-4 rounded-md"
-            type="text"
-            placeholder="Search..."
+            type='text'
+            placeholder='Search...'
+            className='bg-transparent focus:outline-none w-24 sm:w-64'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <span className="absolute right-1 top-1">
-            <CiSearch size={25} />
-          </span>
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
         </form>
-      </div>
-      <nav>
-        <ul className="flex items-center gap-x-5">
-          <li>
-            <NavLink to="/">Home</NavLink>
-          </li>
-          <li>
-            <NavLink to="/about">About</NavLink>
-          </li>
-          <li>
+        <ul className='flex gap-4'>
+          <Link to='/'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              Home
+            </li>
+          </Link>
+          <Link to='/about'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>
+              About
+            </li>
+          </Link>
+          <Link to='/profile'>
             {currentUser ? (
-              <NavLink to="/profile">
-                <img
-                  className="w-8 h-8 object-cover rounded-md cursor-pointer"
-                  src={currentUser.avatar}
-                  alt="profile"
-                />
-              </NavLink>
+              <img
+                className='rounded-full h-7 w-7 object-cover'
+                src={currentUser.avatar}
+                alt='profile'
+              />
             ) : (
-              <NavLink to="/sign-in">Sign in</NavLink>
+              <li className=' text-slate-700 hover:underline'> Sign in</li>
             )}
-          </li>
+          </Link>
         </ul>
-      </nav>
+      </div>
     </header>
   );
-};
-
-export default Header;
+}
