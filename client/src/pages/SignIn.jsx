@@ -41,7 +41,7 @@ const SignIn = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   return (
-    <div className="p-3 max-w-lg  mx-auto">
+    <div className="p-3 max-w-lg  mx-auto mt-20">
       <h1 className="font-bold text-4xl tracking-wide text-center my-5">
         Sign in
       </h1>

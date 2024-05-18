@@ -19,6 +19,8 @@ export default function UpdateListing() {
     description: '',
     address: '',
     type: 'rent',
+    location: 'all',
+    category: 'all',
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
@@ -118,6 +120,36 @@ export default function UpdateListing() {
         type: e.target.id,
       });
     }
+    if (
+      e.target.id === 'aydin' ||
+      e.target.id === 'izmir' ||
+      e.target.id === 'ankara' ||
+      e.target.id === 'istanbul' ||
+      e.target.id === 'mugla' ||
+      e.target.id === 'antalya' ||
+      e.target.id === 'all'
+    ) {
+      setFormData({
+        ...formData,
+        location: e.target.id,
+      });
+    }
+
+    if (
+      e.target.id === 'house' ||
+      e.target.id === 'apartment' ||
+      e.target.id === 'villa' ||
+      e.target.id === 'office' ||
+      e.target.id === 'store' ||
+      e.target.id === 'land' ||
+      e.target.id === 'all'
+    ) {
+      setFormData({
+        ...formData,
+        category: e.target.id,
+      });
+      
+    }
 
     if (
       e.target.id === 'parking' ||
@@ -141,7 +173,6 @@ export default function UpdateListing() {
       });
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -173,7 +204,7 @@ export default function UpdateListing() {
     }
   };
   return (
-    <main className='p-3 max-w-4xl mx-auto'>
+    <main className='p-3 max-w-4xl mx-auto mt-20'>
       <h1 className='text-3xl font-semibold text-center my-7'>
         Update a Listing
       </h1>
@@ -212,6 +243,159 @@ export default function UpdateListing() {
             onChange={handleChange}
             value={formData.address}
           />
+             <div className="flex gap-2 flex-col">
+            <label className="font-semibold">Location:</label>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="all"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "all"}
+                />
+                <span>All</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="aydin"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "aydin"}
+                />
+                <span>Aydın</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="izmir"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "izmir"}
+                />
+                <span>İzmir</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="ankara"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "ankara"}
+                />
+                <span>Ankara</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="istanbul"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "istanbul"}
+                />
+                <span>İstanbul</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="mugla"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "mugla"}
+                />
+                <span>Muğla</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="antalya"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.location === "antalya"}
+                />
+                <span>Antalya</span>
+              </div>
+            </div>
+          </div>
+         
+          
+          <div className="flex gap-2 flex-col">
+            <label className="font-semibold">Category:</label>
+            <div className="grid grid-cols-2 gap-3">
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="all"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "all"}
+                />
+                <span>All</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="house"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "house"}
+                />
+                <span>House</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="apartment"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "apartment"}
+                />
+                <span>Apartment</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="villa"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "villa"}
+                />
+                <span>Villa</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="office"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "office"}
+                />
+                <span>Office</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="store"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "store"}
+                />
+                <span>Store</span>
+              </div>
+              <div className="flex gap-2">
+                <input
+                  type="checkbox"
+                  id="land"
+                  className="w-5"
+                  onChange={handleChange}
+                  checked={formData.category === "land"}
+                />
+                <span>Land</span>
+              </div>
+            </div>
+          </div>
+
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2'>
               <input

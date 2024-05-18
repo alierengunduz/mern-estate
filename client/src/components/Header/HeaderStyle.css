@@ -1,4 +1,10 @@
-
+.header {
+    transition: background-color 0.3s ease;
+  }
+  
+  .header.scrolled {
+    background-color: rgba(0, 0, 0, 0.8); /* İstediğiniz arka plan rengini buraya koyun */
+  }
 
 .total{
     display: grid;
@@ -8,7 +14,7 @@
 
 
 .navbar {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;

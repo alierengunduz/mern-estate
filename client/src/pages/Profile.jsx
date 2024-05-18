@@ -159,7 +159,7 @@ const Profile = () => {
     }
   };
   return (
-    <div className="p-3 max-w-lg  mx-auto">
+    <div className="p-3 max-w-lg  mx-auto mt-24">
       <h1 className="text-3xl font-bold tracking-wide text-center">Profile</h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-y-5  mt-5">
         <input

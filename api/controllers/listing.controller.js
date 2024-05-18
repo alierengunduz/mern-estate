@@ -105,6 +105,18 @@ const getListings = async (req, res, next) => {
       type = { $in: ['sale', 'rent'] };
     }
 
+    let location = req.query.location;
+
+    if (location === undefined || location === 'all') {
+      location = { $in: ['aydin', 'izmir', 'ankara', 'istanbul', 'mugla', 'antalya'] };
+    }
+
+    let category = req.query.category;
+
+    if (category === undefined || category === 'all') {
+      category = { $in: ['house', 'apartment', 'villa', 'office', 'store', 'land'] };
+    }
+
     const searchTerm = req.query.searchTerm || '';
 
     const sort = req.query.sort || 'createdAt';
@@ -117,6 +129,8 @@ const getListings = async (req, res, next) => {
       furnished,
       parking,
       type,
+      location,
+      category
     })
       .sort({ [sort]: order })
       .limit(limit)

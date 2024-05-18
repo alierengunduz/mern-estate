@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { SiHomeassistantcommunitystore } from "react-icons/si";
 import SwiperCore from 'swiper';
 import { useSelector } from 'react-redux';
 import { Navigation } from 'swiper/modules';
@@ -48,9 +49,8 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-
   return (
-    <main>
+    <main className='mt-24'>
       {loading && <p className='text-center my-7 text-2xl'>Loading...</p>}
       {error && (
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
@@ -95,6 +95,16 @@ export default function Listing() {
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'rent' && ' / month'}
             </p>
+           <div className='flex items-center gap-x-5'>
+           <p className='flex items-center  font-bold text-slate-600  text-sm gap-x-1 capitalize'>
+              <FaMapMarkerAlt className='text-green-700' />
+              {listing.location}
+            </p>
+            <p className='flex items-center  font-bold text-slate-600  text-sm gap-x-1 capitalize'>
+              <SiHomeassistantcommunitystore className='text-green-700' />
+              {listing.category}
+            </p>
+           </div>
             <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
               <FaMapMarkerAlt className='text-green-700' />
               {listing.address}
