@@ -2,6 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { RiHome7Fill } from "react-icons/ri";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
@@ -24,12 +25,13 @@ export default function Header() {
   }, [location.search]);
   return (
     <header className='bg-slate-200 shadow-md'>
-      <div className='flex justify-between items-center max-w-6xl mx-auto p-3'>
+      <div className='flex justify-between items-center max-w-6xl mx-auto sm:p-3 p-1'>
         <Link to='/'>
-          <h1 className='font-bold text-sm sm:text-xl flex flex-wrap'>
+          <h1 className='sm:flex hidden font-bold  text-sm sm:text-xl  flex-wrap'>
             <span className='text-slate-500'>Sahand</span>
             <span className='text-slate-700'>Estate</span>
           </h1>
+          <span className='text-gray-600 sm:hidden flex'><RiHome7Fill size={25}/></span>
         </Link>
         <form
           onSubmit={handleSubmit}
@@ -38,7 +40,7 @@ export default function Header() {
           <input
             type='text'
             placeholder='Search...'
-            className='bg-transparent focus:outline-none w-24 sm:w-64'
+            className='bg-transparent focus:outline-none w-40 sm:w-64'
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -47,16 +49,6 @@ export default function Header() {
           </button>
         </form>
         <ul className='flex gap-4'>
-          <Link to='/'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              Home
-            </li>
-          </Link>
-          <Link to='/about'>
-            <li className='hidden sm:inline text-slate-700 hover:underline'>
-              About
-            </li>
-          </Link>
           <Link to='/profile'>
             {currentUser ? (
               <img
